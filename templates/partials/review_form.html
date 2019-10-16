@@ -1,13 +1,13 @@
 <form>
-<form action='/playlists/comments' method='post'>
-    <input type='hidden' value='{{ playlist._id }}' name='playlist_id'/>
+<form action='/coaches/reviews' method='post'>
+    <input type='hidden' value='{{ coach._id }}' name='coach_id'/>
     <fieldset>
-        <legend>Add a Comment</legend>
+        <legend>Add a Review</legend>
         <!-- TITLE -->
         <div class='form-group'>
-            <label for='comment-title'>Title</label><br>
+            <label for='review-title'>Title</label><br>
             <input class='form-control'
-                id='comment-title'
+                id='review-title'
                 type='text'
                 name='title'
                 placeholder='Title'/>
@@ -15,17 +15,17 @@
 
         <!-- DESCRIPTION -->
         <div class='form-group'>
-            <label for='comment-content'>Description</label><br>
+            <label for='review-content'>Description</label><br>
             <textarea class='form-control'
-                id='comment-content'
+                id='review-content'
                 name='content'
                 rows='10'
-                placeholder='Your comment...'></textarea>
+                placeholder='Your review...'></textarea>
         </div>
     </fieldset>
 
     <!-- BUTTON -->
     <div class='form-group'>
-        <button class='btn btn-primary' type='submit'>Save Comment</button>
+        <button class='btn btn-primary' type='submit'>Save Review</button>
     </div>
 </form>

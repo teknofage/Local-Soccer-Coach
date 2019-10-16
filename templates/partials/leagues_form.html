@@ -1,0 +1,41 @@
+<fieldset>
+    <legend>{{ name }}</legend>
+    <!-- Name -->
+    <div class='form-group'>
+        <label for='league-name'>Name</label><br>
+        <input class='form-control' id='league-name' type='text' name='name' value='{{ league.name }}'/>
+    </div>
+    
+    <!-- Age Group -->
+    <div class='form-group'>
+        <label for='age_group'>Age Group</label><br>
+        <input class='form-control' id='age_group' type='text' name='age_group' value='{{ league.age_group }}' />
+    </div>
+    
+    <!-- Level -->
+    <div class='form-group'>
+        <label for='league-level'>Level</label><br>
+        <p class='text-muted'>Add level in the form of ''.</p>
+        <textarea class='form-control' id='league-level' name='level' rows='10' />{{ "\n".join(league.level) }}</textarea>
+    </div>
+
+    <!-- Website -->
+    <div class='form-group'>
+        <label for='website'>Website</label><br>
+        <input class='form-control' id='website' type='text' name='website' value='{{ league.website }}' />
+    </div>
+
+    <!-- REVIEWS -->
+    <div class='form-group'>
+        <label for="reviews">Reviews</label>
+        <p class='text-muted'>Review this league!</p>
+        <select class='form-control' name="reviews" id="rate" value='{{ league.reviews }}'>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+    </div>
+    </fieldset>

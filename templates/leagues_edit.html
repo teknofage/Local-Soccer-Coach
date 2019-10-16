@@ -1,15 +1,15 @@
-<!-- templates/playlists_index.html -->
+<!-- templates/leagues_index.html -->
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Playlists</h1>
+<h1>Leagues</h1>
 
-<a href='/playlists/new'>New Playlist</a>
+<a href='/leagues/new'>New League</a>
 <div class='row'>
-    {% for playlist in playlists %}
+    {% for league in leagues %}
         <div class='col-md-3'>
-            <h2><a href='/playlists/{{ playlist._id }}'>{{ playlist.title }}</a></h2>
-            <small>{{ playlist.description }}</small>
+            <h2><a href='/leagues/{{ league._id }}'>{{ league.title }}</a></h2>
+            <small>{{ league.description }}</small>
         </div>
     {% endfor %}
 </div>

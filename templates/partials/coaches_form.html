@@ -1,0 +1,34 @@
+<fieldset>
+    <legend>{{ name }}</legend>
+    <!-- Name -->
+    <div class='form-group'>
+        <label for='coach-name'>Name</label><br>
+        <input class='form-control' id='coach-name' type='text' name='name' value='{{ coach.name }}'/>
+    </div>
+    
+    <!-- resume -->
+    <div class='form-group'>
+        <label for='resume'>Resume</label><br>
+        <input class='form-control' id='resume' type='text' name='resume' value='{{ coach.resume }}' />
+    </div>
+    
+    <!-- Qualifications -->
+    <div class='form-group'>
+        <label for='coach-qualifications'>Qualifications</label><br>
+        <p class='text-muted'>Add qualifications in the form of ''. Separate with a newline.</p>
+        <textarea class='form-control' id='coach-qualifications' name='qualifications' rows='10' />{{ "\n".join(coach.qualifications) }}</textarea>
+    </div>
+    <!-- REVIEWS -->
+    <div class='form-group'>
+        <label for="reviews">Reviews</label>
+        <p class='text-muted'>Review this coach!</p>
+        <select class='form-control' name="reviews" id="rate" value='{{ coach.reviews }}'>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+    </div>
+    </fieldset>

@@ -1,0 +1,41 @@
+<fieldset>
+    <legend>{{ name }}</legend>
+    <!-- Name -->
+    <div class='form-group'>
+        <label for='field-name'>Name</label><br>
+        <input class='form-control' id='field-name' type='text' name='name' value='{{ field.name }}'/>
+    </div>
+    
+    <!-- Number of Full_pitches -->
+    <div class='form-group'>
+        <label for='full_pitches'>Number of Full Pitches</label><br>
+        <input class='form-control' id='full_pitches' type='text' name='full_pitches' value='{{ field.full_pitches }}' />
+    </div>
+    
+    <!-- Turf -->
+    <div class='form-group'>
+        <label for='field-turf'>Turf</label><br>
+        <p class='text-muted'>Add turf in the form of ''.</p>
+        <textarea class='form-control' id='field-turf' name='turf' rows='10' />{{ "\n".join(field.turf) }}</textarea>
+    </div>
+
+    <!-- Location -->
+    <div class='form-group'>
+        <label for='location'>Location</label><br>
+        <input class='form-control' id='location' type='text' name='location' value='{{ field.location }}' />
+    </div>
+
+    <!-- REVIEWS -->
+    <div class='form-group'>
+        <label for="reviews">Reviews</label>
+        <p class='text-muted'>Review this field!</p>
+        <select class='form-control' name="reviews" id="rate" value='{{ field.reviews }}'>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+    </div>
+    </fieldset>

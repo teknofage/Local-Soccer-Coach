@@ -1,15 +1,15 @@
-<!-- templates/playlists_index.html -->
+<!-- templates/fields_index.html -->
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Playlists</h1>
+<h1>Fields</h1>
 
-<a href='/playlists/new'>New Playlist</a>
+<a href='/fields/new'>New Field</a>
 <div class='row'>
-    {% for playlist in playlists %}
+    {% for field in fields %}
         <div class='col-md-3'>
-            <h2><a href='/playlists/{{ playlist._id }}'>{{ playlist.title }}</a></h2>
-            <small>{{ playlist.description }}</small>
+            <h2><a href='/fields/{{ field._id }}'>{{ field.title }}</a></h2>
+            <small>{{ field.description }}</small>
         </div>
     {% endfor %}
 </div>

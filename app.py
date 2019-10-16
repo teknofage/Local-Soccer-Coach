@@ -3,38 +3,43 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 import os
 
-host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Playlister')
+host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/Local Soccer Coach')
 client = MongoClient(host=f'{host}?retryWrites=false')
 db = client.get_default_database()
-playlists = db.playlists
-comments = db.comments
+coaches = db.coaches
+resumes = db.resumes
+qualifications = db.qualifications
+reviews = db.reviews
+fields = db.fields
+leagues = db.leagues
+
 
 app = Flask(__name__)
 
 
 @app.route('/')
-def playlists_index():
-    """Show all playlists."""
-    return render_template('playlists_index.html', playlists=playlists.find())
+def coaches_index():
+    """Show all coaches."""
+    return render_template('coaches_index.html', coaches=coaches.find())
 
 
-@app.route('/playlists', methods=['POST'])
-def playlists_submit():
-    """Submit a new playlist."""
-    playlist = {
-        'title': request.form.get('title'),
-        'description': request.form.get('description'),
-        'videos': request.form.get('videos').split(),
-        'ratings': request.form.get('ratings')
+@app.route('/coaches', methods=['POST'])
+def coaches_submit():
+    """Submit a new coach."""
+    coach = {
+        'name': request.form.get('name'),
+        'resume': request.form.get('resume'),
+        'qualifications': request.form.get('qualifications').split(),
+        'reviews': request.form.get('reviews')
     }
-    playlist_id = playlists.insert_one(playlist).inserted_id
-    return redirect(url_for('playlists_show', playlist_id=playlist_id))
+    coach_id = coaches.insert_one(coach).inserted_id
+    return redirect(url_for('coaches_show', coach_id=coach_id))
 
 
-@app.route('/playlists/new')
-def playlists_new():
-    """Create a new playlist."""
-    return render_template('playlists_new.html', playlist={}, title='New Playlist')
+@app.route('/coaches/new')
+def coaches_new():
+    """Create a new coach."""
+    return render_template('coaches_new.html', coach={}, title='New Coach')
 
 
 @app.route('/playlists/<playlist_id>')

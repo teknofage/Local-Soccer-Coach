@@ -42,61 +42,61 @@ def coaches_new():
     return render_template('coaches_new.html', coach={}, title='New Coach')
 
 
-@app.route('/playlists/<playlist_id>')
-def playlists_show(playlist_id):
-    """Show a single playlist."""
-    playlist = playlists.find_one({'_id': ObjectId(playlist_id)})
-    playlist_comments = comments.find({'playlist_id': ObjectId(playlist_id)})
-    return render_template('playlists_show.html', playlist=playlist, comments=playlist_comments)
+@app.route('/coaches/<coach_id>')
+def coaches_show(coach_id):
+    """Show a single coach."""
+    coach = coaches.find_one({'_id': ObjectId(coach_id)})
+    coach_comments = comments.find({'coach_id': ObjectId(coach_id)})
+    return render_template('coaches_show.html', coach=coach, comments=coach_comments)
 
 
-@app.route('/playlists/<playlist_id>/edit')
-def playlists_edit(playlist_id):
-    """Show the edit form for a playlist."""
-    playlist = playlists.find_one({'_id': ObjectId(playlist_id)})
-    return render_template('playlists_edit.html', playlist=playlist, title='Edit Playlist')
+@app.route('/coaches/<coach_id>/edit')
+def coaches_edit(coach_id):
+    """Show the edit form for a coach."""
+    coach = coaches.find_one({'_id': ObjectId(coach_id)})
+    return render_template('coaches_edit.html', coach=coach, title='Edit coach')
 
 
-@app.route('/playlists/<playlist_id>', methods=['POST'])
-def playlists_update(playlist_id):
-    """Submit an edited playlist."""
-    updated_playlist = {
+@app.route('/coaches/<coach_id>', methods=['POST'])
+def coaches_update(coach_id):
+    """Submit an edited coach."""
+    updated_coach = {
         'title': request.form.get('title'),
         'description': request.form.get('description'),
         'videos': request.form.get('videos').split()
     }
-    playlists.update_one(
-        {'_id': ObjectId(playlist_id)},
-        {'$set': updated_playlist})
-    return redirect(url_for('playlists_show', playlist_id=playlist_id))
+    coaches.update_one(
+        {'_id': ObjectId(coach_id)},
+        {'$set': updated_coach})
+    return redirect(url_for('coaches_show', coach_id=coach_id))
 
 
-@app.route('/playlists/<playlist_id>/delete', methods=['POST'])
-def playlists_delete(playlist_id):
-    """Delete one playlist."""
-    playlists.delete_one({'_id': ObjectId(playlist_id)})
-    return redirect(url_for('playlists_index'))
+@app.route('/coaches/<coach_id>/delete', methods=['POST'])
+def coaches_delete(coach_id):
+    """Delete one coach."""
+    coaches.delete_one({'_id': ObjectId(coach_id)})
+    return redirect(url_for('coaches_index'))
 
 
-@app.route('/playlists/comments', methods=['POST'])
+@app.route('/coaches/comments', methods=['POST'])
 def comments_new():
     """Submit a new comment."""
     comment = {
         'title': request.form.get('title'),
         'content': request.form.get('content'),
-        'playlist_id': ObjectId(request.form.get('playlist_id'))
+        'coach_id': ObjectId(request.form.get('coach_id'))
     }
     print(comment)
     comment_id = comments.insert_one(comment).inserted_id
-    return redirect(url_for('playlists_show', playlist_id=request.form.get('playlist_id')))
+    return redirect(url_for('coaches_show', coach_id=request.form.get('coach_id')))
 
 
-@app.route('/playlists/comments/<comment_id>', methods=['POST'])
+@app.route('/coaches/comments/<comment_id>', methods=['POST'])
 def comments_delete(comment_id):
     """Action to delete a comment."""
     comment = comments.find_one({'_id': ObjectId(comment_id)})
     comments.delete_one({'_id': ObjectId(comment_id)})
-    return redirect(url_for('playlists_show', playlist_id=comment.get('playlist_id')))
+    return redirect(url_for('coaches_show', coach_id=comment.get('coach_id')))
 
 
 if __name__ == '__main__':

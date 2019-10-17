@@ -42,12 +42,31 @@ def coaches_new():
     return render_template('coaches_new.html', coach={}, title='New Coach')
 
 
-@app.route('/coaches/<coach_id>')
-def coaches_show(coach_id):
+@app.route('/coaches/')
+def coaches_show():
+    """Show a single coach."""
+    allCoaches = coaches.find()
+    print('********************')
+    print(coaches)
+    # coach_reviews = reviews.find({'coach_id': ObjectId(coach_id)})
+    return render_template('coaches_show.html', allCoaches=allCoaches)
+
+
+
+
+
+
+
+@app.route('/coach/<coach_id>')
+def coach_show(coach_id):
     """Show a single coach."""
     coach = coaches.find_one({'_id': ObjectId(coach_id)})
     coach_reviews = reviews.find({'coach_id': ObjectId(coach_id)})
-    return render_template('coaches_show.html', coach=coach, reviews=coach_reviews)
+    return render_template('coach_show.html', coach=coach, reviews=coach_reviews)
+
+
+
+
 
 
 @app.route('/coaches/<coach_id>/edit')

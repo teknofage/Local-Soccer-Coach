@@ -164,7 +164,7 @@ def leagues_edit(league_id):
 def leagues_update(league_id):
     """Submit an edited league."""
     updated_league = {
-        'title': request.form.get('title'),
+        'name': request.form.get('title'),
         'age_group': request.form.get('age_group'),
         'level': request.form.get('level').split(),
         'website': request.form.get('website').split(),
@@ -239,7 +239,7 @@ def field_show(field_id):
     """Show a single field."""
     field = fields.find_one({'_id': ObjectId(field_id)})
     field_reviews = reviews.find({'field_id': ObjectId(field_id)})
-    return render_template('fields_show.html', field=field, reviews=field_reviews)
+    return render_template('field_show.html', field=field, reviews=field_reviews)
 
 # @app.route('/fields/<field_id>')
 # def fields_show(field_id):

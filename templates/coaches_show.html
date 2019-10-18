@@ -6,14 +6,14 @@
     <div class='col-sm-6 col-sm-offset-3'>
 
         {% for coach in allCoaches %}
-            <h3><a href="/coach/{{coach.id}}">{{ coach.name }}</a></h3>
+            <h3><a href="/coach/{{coach._id}}">{{ coach.name }}</a></h3>
 
             <div class="dropdown">
                 <button onclick="myFunction()" class="dropbtn">Edit / Delete</button>
                 <div id="myDropdown" class="dropdown-content">
-                    <a href="/coaches/<coach_id>/edit">Edit</a>
-                    <a href="/coaches/<coach_id>/delete">Delete</a>
-                    <a href="/coach/<coach_id>">Show</a>
+                    <a href="/coaches/{{coach._id}}/edit">Edit</a>
+                    <a href="/coaches/{{coach._id}}/delete">Delete</a>
+                    <a href="/coach/{{coach._id}}">Show</a>
                 </div>
                 </div>
 

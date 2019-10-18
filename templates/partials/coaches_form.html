@@ -9,14 +9,15 @@
     <!-- resume -->
     <div class='form-group'>
         <label for='resume'>Resume</label><br>
-        <input class='form-control' id='resume' type='text' name='resume' value='{{ coach.resume }}' />
+        <p class='text-muted'>Add resume experience in the form of ''. Separate with a newline.</p>
+        <textarea class='form-control' id='coach-resume' name='resume' rows='10' />{{ "\n".join(coach.resume) }}</textarea>
     </div>
     
     <!-- Qualifications -->
     <div class='form-group'>
         <label for='coach-qualifications'>Qualifications</label><br>
-        <p class='text-muted'>Add qualifications in the form of ''. Separate with a newline.</p>
-        <textarea class='form-control' id='coach-qualifications' name='qualifications' rows='10' />{{ "\n".join(coach.qualifications) }}</textarea>
+        <input class='form-control' id='qualifications' type='text' name='qualifications' value='{{ coach.qualifications }}' />
+    
     </div>
     <!-- REVIEWS -->
     <div class='form-group'>

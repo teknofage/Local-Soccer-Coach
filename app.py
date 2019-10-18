@@ -11,7 +11,13 @@ resumes = db.resumes
 qualifications = db.qualifications
 reviews = db.reviews
 fields = db.fields
+number_of_pitches = db.number_of_pitches
+turf = db.turf
+location = db.location
 leagues = db.leagues
+age_group = db.age_group
+level = db.level 
+website = db.website
 
 
 app = Flask(__name__)
@@ -63,7 +69,7 @@ def coach_show(coach_id):
 @app.route('/coaches/<coach_id>/edit')
 def coaches_edit(coach_id):
     """Show the edit form for a coach."""
-    coach = coaches.find_one({'_id': ObjectId()})
+    coach = coaches.find_one({'_id': ObjectId(coach_id)})
     return render_template('coaches_edit.html', coach=coach, title='Edit coach')
 
 
@@ -139,18 +145,18 @@ def leagues_new():
     return render_template('leagues_new.html', league={}, title='New league')
 
 
-@app.route('/leagues/<league_id>')
+@app.route('/league/<league_id>')
 def league_show(league_id):
     """Show a single league."""
     league = leagues.find_one({'_id': ObjectId(league_id)})
     league_reviews = reviews.find({'league_id': ObjectId(league_id)})
-    return render_template('leagues_show.html', league=league, reviews=league_reviews)
+    return render_template('league_show.html', league=league, reviews=league_reviews)
 
 
 @app.route('/leagues/<league_id>/edit')
 def leagues_edit(league_id):
     """Show the edit form for a league."""
-    league = leagues.find_one({'_id': ObjectId()})
+    league = leagues.find_one({'_id': ObjectId(league_id)})
     return render_template('leagues_edit.html', league=league, title='Edit league')
 
 
@@ -211,8 +217,8 @@ def fields_submit():
     """Submit a new field."""
     field = {
         'name': request.form.get('name'),
-        'number_of_pitches': request.form.get('number_of_pitches'),
-        'turf': request.form.get('turf').split(),
+        'number_of_pitches': request.form.get(['number_of_pitches']),
+        'turf': request.form.get(['turf']).split(),
         'location': request.form.get('location').split(),
         'reviews': request.form.get('reviews')
     }

@@ -44,19 +44,14 @@ def coaches_new():
 
 @app.route('/coaches/')
 def coaches_show():
-    """Show a single coach."""
+    """Show all coaches."""
     allCoaches = coaches.find()
     print('********************')
-    print(coaches)
-    # coach_reviews = reviews.find({'coach_id': ObjectId(coach_id)})
+    print('coaches')
     return render_template('coaches_show.html', allCoaches=allCoaches)
 
 
-
-
-
-
-
+#Mitchell inserted this route while trying to help me
 @app.route('/coach/<coach_id>')
 def coach_show(coach_id):
     """Show a single coach."""
@@ -65,14 +60,10 @@ def coach_show(coach_id):
     return render_template('coach_show.html', coach=coach, reviews=coach_reviews)
 
 
-
-
-
-
 @app.route('/coaches/<coach_id>/edit')
 def coaches_edit(coach_id):
     """Show the edit form for a coach."""
-    coach = coaches.find_one({'_id': ObjectId(coach_id)})
+    coach = coaches.find_one({'_id': ObjectId()})
     return render_template('coaches_edit.html', coach=coach, title='Edit coach')
 
 
@@ -80,9 +71,10 @@ def coaches_edit(coach_id):
 def coaches_update(coach_id):
     """Submit an edited coach."""
     updated_coach = {
-        'title': request.form.get('title'),
-        'description': request.form.get('description'),
-        'videos': request.form.get('videos').split()
+        'name': request.form.get('name'),
+        'resume': request.form.get('resume'),
+        'qualifications': request.form.get('qualifications').split(),
+        'reviews': request.form.get('reviews')
     }
     coaches.update_one(
         {'_id': ObjectId(coach_id)},
@@ -119,11 +111,13 @@ def coach_reviews_delete(review_id):
 
 #Leagues
 
-@app.route('/')
-def leagues_index():
+@app.route('/leagues')
+def leagues_show():
     """Show all leagues."""
-    return render_template('leagues_index.html', leagues=leagues.find())
-
+    allLeagues = leagues.find()
+    print('********************')
+    print('leagues')
+    return render_template('leagues_show.html', allLeagues=allLeagues)
 
 @app.route('/leagues', methods=['POST'])
 def leagues_submit():
@@ -146,7 +140,7 @@ def leagues_new():
 
 
 @app.route('/leagues/<league_id>')
-def leagues_show(league_id):
+def league_show(league_id):
     """Show a single league."""
     league = leagues.find_one({'_id': ObjectId(league_id)})
     league_reviews = reviews.find({'league_id': ObjectId(league_id)})
@@ -156,7 +150,7 @@ def leagues_show(league_id):
 @app.route('/leagues/<league_id>/edit')
 def leagues_edit(league_id):
     """Show the edit form for a league."""
-    league = leagues.find_one({'_id': ObjectId(league_id)})
+    league = leagues.find_one({'_id': ObjectId()})
     return render_template('leagues_edit.html', league=league, title='Edit league')
 
 
@@ -203,10 +197,13 @@ def league_reviews_delete(review_id):
 
 #Fields
 
-@app.route('/')
-def fields_index():
+@app.route('/fields')
+def fields_show():
     """Show all fields."""
-    return render_template('fields_index.html', fields=fields.find())
+    allFields = fields.find()
+    print('********************')
+    print('fields')
+    return render_template('fields_show.html', allFields=allFields)
 
 
 @app.route('/fields', methods=['POST'])
@@ -230,12 +227,18 @@ def fields_new():
 
 
 @app.route('/fields/<field_id>')
-def fields_show(field_id):
+def field_show(field_id):
     """Show a single field."""
     field = fields.find_one({'_id': ObjectId(field_id)})
     field_reviews = reviews.find({'field_id': ObjectId(field_id)})
     return render_template('fields_show.html', field=field, reviews=field_reviews)
 
+# @app.route('/fields/<field_id>')
+# def fields_show(field_id):
+#     """Show all fields."""
+#     field = fields.find_one({'_id': ObjectId(field_id)})
+#     field_reviews = reviews.find({'field_id': ObjectId(field_id)})
+#     return render_template('fields_show.html', field=field, reviews=field_reviews)
 
 @app.route('/fields/<field_id>/edit')
 def fields_edit(field_id):

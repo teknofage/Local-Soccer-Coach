@@ -5,7 +5,8 @@
 <div class='row'>
     <div class='col-sm-6 col-sm-offset-3'>
         <h1>{{ league.title }}</h1>
-        <h2>{{ league.description }}</h2>
+        <h2>{{ league.age_group }}</h2>
+        <h3>{{ league.level }}</h3>
         {% for website in league.website %}
             <div class="card"><div class="card-body">
                 <iframe width="420" height="315" src="{{ URL }}"></iframe>

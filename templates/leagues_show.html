@@ -5,14 +5,14 @@
 <div class='row'>
     <div class='col-sm-6 col-sm-offset-3'>
         {% for league in allLeagues %}
-            <h3><a href="/league/{{league.id}}">{{ league.name }}</a></h3>
+            <h3><a href="/league/{{league._id}}">{{ league.name }}</a></h3>
 
             <div class="dropdown">
-                <button onclick="myFunction()" class="dropbtn">Edit / Delete</button>
+                <!-- <button onclick="myFunction()" class="dropbtn">Edit / Delete</button> -->
                 <div id="myDropdown" class="dropdown-content">
-                    <a href="/leagues/<league_id>/edit">Edit</a>
-                    <a href="/leagues/<league_id>/delete">Delete</a>
-                    <a href="/league/<league_id>">Show</a>
+                    <a href="/leagues/{{league._id}}/edit">Edit</a>
+                    <a href="/leagues/{{league._id}}/delete">Delete</a>
+                    <a href="/league/{{league._id}}">Show</a>
                 </div>
                 </div>
         {% endfor %}

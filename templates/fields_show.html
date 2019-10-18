@@ -5,14 +5,14 @@
 <div class='row'>
     <div class='col-sm-6 col-sm-offset-3'>
         {% for field in allFields %}
-            <h3><a href="/field/{{field.id}}">{{ field.name }}</a></h3>
+            <h3><a href="/field/{{field._id}}">{{ field.name }}</a></h3>
 
             <div class="dropdown">
-                <button onclick="myFunction()" class="dropbtn">Edit / Delete</button>
+                <!-- <button onclick="myFunction()" class="dropbtn">Edit / Delete</button> -->
                 <div id="myDropdown" class="dropdown-content">
-                    <a href="/fields/<field_id>/edit">Edit</a>
-                    <a href="/fields/<field_id>/delete">Delete</a>
-                    <a href="/field/<field_id>">Show</a>
+                    <a href="/fields/{{field._id}}/edit">Edit</a>
+                    <a href="/fields/{{field._id}}/delete">Delete</a>
+                    <a href="/field/{{field._id}}">Show</a>
                 </div>
                 </div>
         {% endfor %}

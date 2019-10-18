@@ -1,16 +1,16 @@
-<!-- templates/leagues_index.html -->
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Leagues</h1>
-
-<a href='/leagues/new'>New League</a>
 <div class='row'>
-    {% for league in leagues %}
-        <div class='col-md-3'>
-            <h2><a href='/leagues/{{ league._id }}'>{{ league.title }}</a></h2>
-            <small>{{ league.description }}</small>
-        </div>
-    {% endfor %}
+    <div class='col-sm-6 col-sm-offset-3'>
+        <form method='POST' action='/leagues/{{league._id}}'>
+            <input type='hidden' name='_method' value='PUT'/>
+            {% include 'partials/leagues_form.html' %}
+            <!-- BUTTON -->
+            <div class='form-group'>
+                <button class='btn btn-primary' type='submit'>Save league</button>
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}

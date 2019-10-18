@@ -165,8 +165,10 @@ def leagues_update(league_id):
     """Submit an edited league."""
     updated_league = {
         'title': request.form.get('title'),
-        'description': request.form.get('description'),
-        'videos': request.form.get('videos').split()
+        'age_group': request.form.get('age_group'),
+        'level': request.form.get('level').split(),
+        'website': request.form.get('website').split(),
+        'reviews': request.form.get('reviews')
     }
     leagues.update_one(
         {'_id': ObjectId(league_id)},
@@ -178,7 +180,7 @@ def leagues_update(league_id):
 def leagues_delete(league_id):
     """Delete one league."""
     leagues.delete_one({'_id': ObjectId(league_id)})
-    return redirect(url_for('leagues_index'))
+    return redirect(url_for('leagues_show'))
 
 
 @app.route('/leagues/reviews', methods=['POST'])
@@ -258,8 +260,10 @@ def fields_update(field_id):
     """Submit an edited field."""
     updated_field = {
         'title': request.form.get('title'),
-        'description': request.form.get('description'),
-        'videos': request.form.get('videos').split()
+        'number_of_pitches': request.form.get(['number_of_pitches']),
+        'turf': request.form.get(['turf']).split(),
+        'location': request.form.get('location').split(),
+        'reviews': request.form.get('reviews')
     }
     fields.update_one(
         {'_id': ObjectId(field_id)},

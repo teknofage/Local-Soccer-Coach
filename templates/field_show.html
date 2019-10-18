@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<a href='/'>Back to Home</a>
+<div class='row'>
+    <div class='col-sm-6 col-sm-offset-3'>
+        <h1>{{ field.name }}</h1>
+        <h2>{{ field.number_of_pitches }}</h2>
+        <h3>{{ field.turf }}</h3>
+        {% for location in field.location %}
+        <p>{{ location }}</p>
+
+        {% endfor %}
+        <p><a href='/fields/{{ field._id }}/edit'>Edit</a></p>
+        <p><form method='POST' action='/fields/{{ field._id }}/delete'>
+            <input type='hidden' name='_method' value='DELETE'>
+            <button class='btn btn-primary' type='submit'>Delete</button>
+        </form></p>
+
+        {% include 'partials/review_form.html' %}
+
+        <hr>
+
+    <!-- Show Reviews -->
+    {% for comment in comments %}
+        {% include 'partials/review.html' %}
+    {% endfor %}
+    
+    </div>
+</div>
+{% endblock %}
